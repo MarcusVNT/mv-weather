@@ -1,11 +1,11 @@
-import { Grid2, Typography } from '@mui/material'
+import { Grid2 as Grid, Typography } from '@mui/material'
 
 export default function Home() {
   return (
-    <Grid2>
+    <Grid>
       <Typography variant="h1" component="h1">
         Mv Weather
       </Typography>
-    </Grid2>
+    </Grid>
   )
 }
