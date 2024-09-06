@@ -4,7 +4,7 @@ export const theme = createTheme({
   palette: {
     mode: 'dark',
     background: {
-      default: '#121214',
+      default: '#fefaee',
       paper: '#2E2E2E',
     },
     primary: {
@@ -46,10 +46,21 @@ export const theme = createTheme({
       fontSize: '1.5rem',
     },
     body1: {
-      color: '#A9A9B2',
+      color: '#133659',
     },
   },
   components: {
+    MuiCssBaseline: {
+      styleOverrides: {
+        body: {
+          background: 'linear-gradient(180deg, #fefaee , #efe9db)',
+          margin: 0,
+          padding: 0,
+          backgroundAttachment: 'fixed',
+        },
+      },
+    },
+
     MuiButton: {
       styleOverrides: {
         root: {
@@ -64,11 +75,24 @@ export const theme = createTheme({
           props: { variant: 'outlined' },
           style: {
             '& .MuiOutlinedInput-root': {
-              background: '#202024',
-              borderRadius: 8,
+              background: 'transparent',
+              borderRadius: 16,
             },
             '& .MuiOutlinedInput-notchedOutline': {
-              borderColor: '#202024',
+              borderColor: '#a7cad1',
+            },
+            '&:hover .MuiOutlinedInput-notchedOutline': {
+              borderColor: '#3fa6bb', // Cor da borda ao passar o mouse
+            },
+            '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline':
+              {
+                borderColor: '#3fa6bb', // Cor da borda quando em foco
+              },
+            '& .MuiInputLabel-root': {
+              color: '#a7cad1',
+            },
+            '& .MuiInputBase-input': {
+              color: '#a7cad1', // Cor do texto quando o campo está em foco
             },
           },
         },
