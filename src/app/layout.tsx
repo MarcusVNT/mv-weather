@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import LayoutClient from './layout.client'
+import Nav from '@/components/Nav'
 
 export const metadata: Metadata = {
   title: 'MV Weather',
@@ -17,7 +18,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <LayoutClient>{children}</LayoutClient>
+        <LayoutClient>
+          <Nav />
+          {children}
+        </LayoutClient>
       </body>
     </html>
   )

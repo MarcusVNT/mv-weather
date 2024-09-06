@@ -18,5 +18,3 @@ export default function LayoutClient({ children }: LayoutClientProps) {
     </ThemeProvider>
   )
 }
-// #fffbef
-// #f0eadc
