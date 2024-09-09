@@ -8,8 +8,10 @@ export const theme = createTheme({
       paper: '#2E2E2E',
     },
     primary: {
-      light: '#00B37E',
-      main: '#00875F',
+      // light: '#00B37E',
+      // main: '#00875F',
+      light: '#3fa6bb',
+      main: '#133659',
     },
     error: {
       light: '#FF7E7E',
