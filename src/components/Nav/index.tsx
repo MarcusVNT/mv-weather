@@ -1,16 +1,12 @@
 import {
   AppBar,
-  Button,
-  Grid2 as Grid,
-  IconButton,
   InputAdornment,
-  OutlinedInput,
   Stack,
   TextField,
   Toolbar,
 } from '@mui/material'
-import Image from 'next/image'
 import SearchIcon from '@mui/icons-material/Search'
+import Image from 'next/image'
 
 export default function Nav() {
   return (
@@ -26,13 +22,17 @@ export default function Nav() {
           alignItems="center"
           justifyContent="space-between"
           width="100%"
+          spacing={2}
         >
-          <Image
-            src="/mv-weather-logo.png"
-            width={250}
-            height={45}
-            alt="Logo MV Waether"
-          />
+          <Stack maxWidth="250px">
+            <Image
+              src="/mv-weather-logo.png"
+              width={200}
+              height={35}
+              alt="Logo MV Waether"
+            />
+          </Stack>
+
           <Stack>
             <TextField
               variant="outlined"
