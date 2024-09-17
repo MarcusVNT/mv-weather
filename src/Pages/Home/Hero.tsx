@@ -1,7 +1,25 @@
+'use client'
 import { Container, Stack, Typography } from '@mui/material'
 import Grid from '@mui/material/Grid2'
+import { useEffect, useState } from 'react'
 
 export default function Hero() {
+  const [location, setLocation] = useState<boolean>(false)
+  const [weather, setWeather] = useState(false)
+  const [lat, setLat] = useState<number | null>(null)
+  const [long, setLon] = useState<number | null>(null)
+
+  // useEffect(() => {
+  //   navigator.geolocation.getCurrentPosition(position => {
+  //     const { latitude, longitude } = position.coords
+  //     setLat(latitude)
+  //     setLon(longitude)
+  //     setLocation(true)
+  //     getWeather(latitude, longitude)
+  //     console.log(position.coords.latitude, position.coords.longitude)
+  //   })
+  // }, [])
+
   return (
     <Stack
       m="16px"
