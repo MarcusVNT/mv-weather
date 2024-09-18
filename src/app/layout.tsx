@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import LayoutClient from './layout.client'
 import Nav from '@/components/Nav'
 import { Container, Stack } from '@mui/material'
+import { WeatherProvider } from '@/weatherContext'
 
 export const metadata: Metadata = {
   title: 'MV Weather',
@@ -20,12 +21,14 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <LayoutClient>
-          <Container disableGutters>
-            <Stack maxWidth={1200}>
-              <Nav />
-              {children}
-            </Stack>
-          </Container>
+          <WeatherProvider>
+            <Container disableGutters>
+              <Stack maxWidth={1200}>
+                <Nav />
+                {children}
+              </Stack>
+            </Container>
+          </WeatherProvider>
         </LayoutClient>
       </body>
     </html>

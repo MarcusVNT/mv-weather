@@ -1,21 +1,7 @@
-'use client'
-import { useWeather } from '@/weatherContext'
 import { Stack, Typography } from '@mui/material'
 import Grid from '@mui/material/Grid2'
-import HeroModel from './HeroModel'
-import Image from 'next/image'
 
-export default function Hero() {
-  const { weatherData } = useWeather()
-
-  if (!weatherData) {
-    return <HeroModel />
-  }
-
-  const iconUrl = weatherData.icon.startsWith('//')
-    ? `https:${weatherData.icon}`
-    : weatherData.icon
-
+export default function HeroModel() {
   return (
     <Stack
       m="16px"
@@ -35,14 +21,10 @@ export default function Hero() {
           gap="32px"
           borderRadius="8px 8px 0 0"
         >
-          <Typography variant="h1">
-            {weatherData.city}
-            <Typography>
-              {weatherData.region} - {weatherData.country}
-            </Typography>
-          </Typography>
+          <Typography variant="h1">San Martin de Los Andes</Typography>
           <Grid>
-            <Typography>{weatherData.localTime}</Typography>
+            <Typography>9:45 AM</Typography>
+            <Typography>Quarta-feira, 25 de setembro</Typography>
           </Grid>
         </Stack>
         <Stack
@@ -52,11 +34,12 @@ export default function Hero() {
           p="8px"
         >
           <Grid>
-            <Typography fontSize="40px">{weatherData.temperature}º</Typography>
-            <Typography>{weatherData.condition}</Typography>
+            <Typography fontSize="40px">12º</Typography>
+            <Typography>Condição</Typography>
           </Grid>
           <Grid>
-            <Image src={iconUrl} alt="Climate icon" width={64} height={64} />
+            <Typography>Imagem do clima do dia</Typography>
+            {/* Esse componente será trocado por um componente de imagem */}
           </Grid>
         </Stack>
       </Stack>
