@@ -49,14 +49,46 @@ export default function Hero() {
           alignItems="center"
           justifyContent="space-between"
           flexDirection="row"
-          p="8px"
+          p="8px 32px"
+        >
+          <Grid borderRadius="8px" bgcolor="rgba(216, 243, 248, 0.2)" p="8px">
+            <Typography fontSize="3.5rem">
+              {weatherData.temperature}º
+            </Typography>
+          </Grid>
+          <Stack
+            alignItems="center"
+            justifyContent="center"
+            p="8px"
+            borderRadius="8px"
+            bgcolor="rgba(216, 243, 248, 0.2)"
+          >
+            <Image src={iconUrl} alt="Climate icon" width={64} height={64} />
+          </Stack>
+        </Stack>
+        <Stack
+          borderRadius="8px"
+          bgcolor="rgba(216, 243, 248, 0.2)"
+          p="8px 48px"
+          m="0 8px 8px 8px"
+          flexDirection="row"
+          justifyContent="space-between"
         >
           <Grid>
-            <Typography fontSize="40px">{weatherData.temperature}º</Typography>
-            <Typography>{weatherData.condition}</Typography>
+            <Typography fontWeight={600}>
+              Condition: {weatherData.condition}
+            </Typography>
+            <Typography fontWeight={600}>
+              Feels like: {weatherData.feelsLike}º
+            </Typography>
           </Grid>
           <Grid>
-            <Image src={iconUrl} alt="Climate icon" width={64} height={64} />
+            <Typography fontWeight={600}>
+              Wind: {weatherData.wind} km/h
+            </Typography>
+            <Typography fontWeight={600}>
+              Humidity: {weatherData.humidity}%
+            </Typography>
           </Grid>
         </Stack>
       </Stack>
