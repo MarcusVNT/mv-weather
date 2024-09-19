@@ -1,9 +1,14 @@
 'use client'
 import { useWeather } from '@/weatherContext'
-import { Stack, Typography } from '@mui/material'
+import { Stack, Typography, useMediaQuery } from '@mui/material'
 import Grid from '@mui/material/Grid2'
 import HeroModel from './HeroModel'
 import Image from 'next/image'
+// icons import
+import DeviceThermostatOutlinedIcon from '@mui/icons-material/DeviceThermostatOutlined'
+import AirOutlinedIcon from '@mui/icons-material/AirOutlined'
+import WaterDropOutlinedIcon from '@mui/icons-material/WaterDropOutlined'
+import StreamOutlinedIcon from '@mui/icons-material/StreamOutlined'
 
 export default function Hero() {
   const { weatherData } = useWeather()
@@ -15,6 +20,8 @@ export default function Hero() {
   const iconUrl = weatherData.icon.startsWith('//')
     ? `https:${weatherData.icon}`
     : weatherData.icon
+
+  const isSmallScreen = useMediaQuery('(max-width:560px)')
 
   return (
     <Stack
@@ -51,11 +58,15 @@ export default function Hero() {
           flexDirection="row"
           p="8px 32px"
         >
-          <Grid borderRadius="8px" bgcolor="rgba(216, 243, 248, 0.2)" p="8px">
-            <Typography fontSize="3.5rem">
-              {weatherData.temperature}º
-            </Typography>
-          </Grid>
+          <Stack
+            borderRadius="8px"
+            bgcolor="rgba(216, 243, 248, 0.2)"
+            p="8px"
+            alignItems="center"
+          >
+            <Typography fontSize="1.25rem">Temperature:</Typography>
+            <Typography fontSize="3rem">{weatherData.temperature}º</Typography>
+          </Stack>
           <Stack
             alignItems="center"
             justifyContent="center"
@@ -69,26 +80,50 @@ export default function Hero() {
         <Stack
           borderRadius="8px"
           bgcolor="rgba(216, 243, 248, 0.2)"
-          p="8px 48px"
+          p={isSmallScreen ? '8px 24px' : '8px 48px'}
           m="0 8px 8px 8px"
-          flexDirection="row"
+          flexDirection={isSmallScreen ? 'column' : 'row'}
           justifyContent="space-between"
         >
           <Grid>
-            <Typography fontWeight={600}>
-              Condition: {weatherData.condition}
-            </Typography>
-            <Typography fontWeight={600}>
-              Feels like: {weatherData.feelsLike}º
-            </Typography>
+            <Stack flexDirection="row" gap="8px">
+              <StreamOutlinedIcon />
+              <Typography
+                fontSize={isSmallScreen ? '0.9rem' : '1rem'}
+                fontWeight={600}
+              >
+                Condition: {weatherData.condition}
+              </Typography>
+            </Stack>
+            <Stack flexDirection="row" gap="8px">
+              <DeviceThermostatOutlinedIcon />
+              <Typography
+                fontWeight={600}
+                fontSize={isSmallScreen ? '0.9rem' : '1rem'}
+              >
+                Feels like: {weatherData.feelsLike}º
+              </Typography>
+            </Stack>
           </Grid>
           <Grid>
-            <Typography fontWeight={600}>
-              Wind: {weatherData.wind} km/h
-            </Typography>
-            <Typography fontWeight={600}>
-              Humidity: {weatherData.humidity}%
-            </Typography>
+            <Stack flexDirection="row" gap="8px">
+              <AirOutlinedIcon />
+              <Typography
+                fontWeight={600}
+                fontSize={isSmallScreen ? '0.9rem' : '1rem'}
+              >
+                Wind: {weatherData.wind} km/h
+              </Typography>
+            </Stack>
+            <Stack flexDirection="row" gap="8px">
+              <WaterDropOutlinedIcon />
+              <Typography
+                fontWeight={600}
+                fontSize={isSmallScreen ? '0.9rem' : '1rem'}
+              >
+                Humidity: {weatherData.humidity}%
+              </Typography>
+            </Stack>
           </Grid>
         </Stack>
       </Stack>
