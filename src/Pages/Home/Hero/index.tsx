@@ -2,8 +2,8 @@
 import { useWeather } from '@/weatherContext'
 import { Stack, Typography, useMediaQuery } from '@mui/material'
 import Grid from '@mui/material/Grid2'
-import HeroModel from './HeroModel'
 import Image from 'next/image'
+
 // icons import
 import DeviceThermostatOutlinedIcon from '@mui/icons-material/DeviceThermostatOutlined'
 import AirOutlinedIcon from '@mui/icons-material/AirOutlined'
@@ -14,7 +14,7 @@ export default function Hero() {
   const { weatherData } = useWeather()
 
   if (!weatherData) {
-    return <HeroModel />
+    return null
   }
 
   const iconUrl = weatherData.icon.startsWith('//')
