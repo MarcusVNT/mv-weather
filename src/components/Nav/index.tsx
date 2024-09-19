@@ -29,7 +29,7 @@ export default function Nav() {
 
   let getWeather = async (city: string) => {
     const response = await fetch(
-      `http://api.weatherapi.com/v1//current.json?key=${API_KEY}&q=${city}&lang=pt`
+      `http://api.weatherapi.com/v1//current.json?key=${API_KEY}&q=${city}&lang=en`
     )
     const data = await response.json()
 
@@ -43,6 +43,8 @@ export default function Nav() {
         temperature: data.current.temp_c,
         feelsLike: data.current.feelslike_c,
         icon: data.current.condition.icon,
+        wind: data.current.wind_kph,
+        humidity: data.current.humidity,
       })
     }
     if (response.ok) {

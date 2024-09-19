@@ -10,6 +10,8 @@ type WeatherDataType = {
   temperature: number
   feelsLike: number
   icon: string
+  wind: number
+  humidity: number
   // minTemp: number
   // maxTemp: number
 }
