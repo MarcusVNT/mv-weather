@@ -1,6 +1,7 @@
 'use client'
 import {
   AppBar,
+  IconButton,
   InputAdornment,
   Stack,
   TextField,
@@ -117,7 +118,12 @@ export default function Nav() {
                     input: {
                       endAdornment: (
                         <InputAdornment position="end">
-                          <SearchIcon sx={{ color: '#a7cad1' }} />
+                          <IconButton
+                            type="submit"
+                            onSubmit={handleSubmit(handleOnSubmit)}
+                          >
+                            <SearchIcon sx={{ color: '#a7cad1' }} />
+                          </IconButton>
                         </InputAdornment>
                       ),
                     },
