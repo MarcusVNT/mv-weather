@@ -1,6 +1,14 @@
 'use client'
 import { createContext, ReactNode, useContext, useState } from 'react'
 
+type ForecastDaysType = {
+  date: string
+  maxTemp: number
+  minTemp: number
+  condition: string
+  icon: string
+}
+
 type WeatherDataType = {
   city: string
   country: string
@@ -12,13 +20,13 @@ type WeatherDataType = {
   icon: string
   wind: number
   humidity: number
-  // minTemp: number
-  // maxTemp: number
 }
 
 type WeatherContextType = {
   weatherData: WeatherDataType | null
   setWeatherData: (data: WeatherDataType) => void
+  forecastDaysData: ForecastDaysType[] | null
+  setForecastDaysData: (data: ForecastDaysType[]) => void
 }
 
 const weatherContext = createContext<WeatherContextType | undefined>(undefined)
@@ -33,8 +41,18 @@ export const useWeather = () => {
 
 export const WeatherProvider = ({ children }: { children: ReactNode }) => {
   const [weatherData, setWeatherData] = useState<WeatherDataType | null>(null)
+  const [forecastDaysData, setForecastDaysData] = useState<
+    ForecastDaysType[] | null
+  >(null)
   return (
-    <weatherContext.Provider value={{ weatherData, setWeatherData }}>
+    <weatherContext.Provider
+      value={{
+        weatherData,
+        setWeatherData,
+        forecastDaysData,
+        setForecastDaysData,
+      }}
+    >
       {children}
     </weatherContext.Provider>
   )

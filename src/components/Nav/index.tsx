@@ -27,7 +27,7 @@ export default function Nav() {
 
   const { setWeatherData } = useWeather()
 
-  let getWeather = async (city: string) => {
+  let getCurrentWeather = async (city: string) => {
     const response = await fetch(
       `http://api.weatherapi.com/v1//current.json?key=${API_KEY}&q=${city}&lang=en`
     )
@@ -47,14 +47,32 @@ export default function Nav() {
         humidity: data.current.humidity,
       })
     }
+    console.log(data) //tirar depois
+  }
+
+  const { setForecastDaysData } = useWeather()
+  let getForecastWeather = async (city: string) => {
+    const response = await fetch(
+      `http://api.weatherapi.com/v1//forecast.json?key=${API_KEY}&q=${city}&days=3&lang=en`
+    )
+    const data = await response.json()
+
     if (response.ok) {
-      console.log(data)
+      const forecast = data.forecast.forecastday.map((day: any) => ({
+        date: day.date,
+        maxTemp: day.day.maxtemp_c,
+        minTemp: day.day.mintemp_c,
+        condition: day.day.condition.text,
+        icon: day.day.condition.icon,
+      }))
+      setForecastDaysData(forecast)
+      console.log(forecast) //Tirar depois
     }
   }
 
   const handleOnSubmit = (data: SearchFieldType) => {
-    getWeather(data.city)
-    // console.log(data.city)
+    getCurrentWeather(data.city)
+    getForecastWeather(data.city)
   }
 
   return (
