@@ -53,7 +53,7 @@ export default function Nav() {
   const { setForecastDaysData } = useWeather()
   let getForecastWeather = async (city: string) => {
     const response = await fetch(
-      `http://api.weatherapi.com/v1//forecast.json?key=${API_KEY}&q=${city}&days=3&lang=en`
+      `http://api.weatherapi.com/v1//forecast.json?key=${API_KEY}&q=${city}&days=3&aqi=yes&lang=en`
     )
     const data = await response.json()
 
@@ -64,6 +64,11 @@ export default function Nav() {
         minTemp: day.day.mintemp_c,
         condition: day.day.condition.text,
         icon: day.day.condition.icon,
+        maxWind: day.day.maxwind_kph,
+        totalPrecipitation: day.day.totalprecip_mm,
+        totalSnow: day.day.totalsnow_cm,
+        dailyChanceOfRain: day.day.daily_chance_of_rain,
+        dailyChanceOfSnow: day.day.daily_chance_of_snow,
       }))
       setForecastDaysData(forecast)
       console.log(forecast) //Tirar depois

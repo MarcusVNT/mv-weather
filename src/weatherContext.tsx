@@ -7,6 +7,11 @@ type ForecastDaysType = {
   minTemp: number
   condition: string
   icon: string
+  maxWind: number
+  totalPrecipitation: number
+  totalSnow: number
+  dailyChanceOfRain: number
+  dailyChanceOfSnow: number
 }
 
 type WeatherDataType = {
