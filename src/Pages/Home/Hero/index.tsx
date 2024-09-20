@@ -65,7 +65,7 @@ export default function Hero() {
             alignItems="center"
           >
             <Typography fontSize="1.25rem">Temperature:</Typography>
-            <Typography fontSize="3rem">{weatherData.temperature}º</Typography>
+            <Typography fontSize="3rem">{weatherData.temperature}ºC</Typography>
           </Stack>
           <Stack
             alignItems="center"
@@ -101,7 +101,7 @@ export default function Hero() {
                 fontWeight={600}
                 fontSize={isSmallScreen ? '0.9rem' : '1rem'}
               >
-                Feels like: {weatherData.feelsLike}º
+                Feels like: {weatherData.feelsLike}ºC
               </Typography>
             </Stack>
           </Grid>
