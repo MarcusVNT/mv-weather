@@ -3,6 +3,7 @@ import { useWeather } from '@/weatherContext'
 import Hero from './Hero'
 import PeriodNav from './PeriodNav'
 import HeroNull from './Hero/HeroNull'
+import Today from './Forecast/Today'
 
 export default function HomePage() {
   const { weatherData } = useWeather()
@@ -14,6 +15,7 @@ export default function HomePage() {
     <>
       <PeriodNav />
       <Hero />
+      <Today />
     </>
   )
 }
