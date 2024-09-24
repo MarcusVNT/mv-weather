@@ -1,11 +1,13 @@
 'use client'
-import { Container, MenuItem, Stack, styled } from '@mui/material'
-import Grid from '@mui/material/Grid2'
-import { useState } from 'react'
+import { MenuItem, Stack, styled } from '@mui/material'
 
-export default function PeriodNav() {
-  const [selectedItem, setSelectedItem] = useState<string | null>(null)
-
+export default function PeriodNav({
+  selectedItem,
+  onSelect,
+}: {
+  selectedItem: string | null
+  onSelect: (item: string) => void
+}) {
   const StyledMenuItem = styled(MenuItem)(({ selected }) => ({
     fontWeight: 700,
     position: 'relative',
@@ -32,11 +34,6 @@ export default function PeriodNav() {
     },
   }))
 
-  const handleClickMenuItem = (item: string) => {
-    console.log('click')
-    setSelectedItem(item)
-  }
-
   return (
     <Stack
       alignItems="center"
@@ -46,21 +43,21 @@ export default function PeriodNav() {
       <Stack flexDirection="row" justifyContent="space-evenly" width="100%">
         <StyledMenuItem
           selected={selectedItem === 'today'}
-          onClick={() => handleClickMenuItem('today')}
+          onClick={() => onSelect('today')}
         >
           Today
         </StyledMenuItem>
         <StyledMenuItem
           selected={selectedItem === 'hourly'}
-          onClick={() => handleClickMenuItem('hourly')}
+          onClick={() => onSelect('hourly')}
         >
           Hourly
         </StyledMenuItem>
         <StyledMenuItem
-          selected={selectedItem === '10 days'}
-          onClick={() => handleClickMenuItem('10 days')}
+          selected={selectedItem === '3 days'}
+          onClick={() => onSelect('3 days')}
         >
-          10 days
+          3 days
         </StyledMenuItem>
       </Stack>
     </Stack>
