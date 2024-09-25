@@ -48,7 +48,6 @@ export default function Nav() {
         humidity: data.current.humidity,
       })
     }
-    console.log(data) //tirar depois
   }
 
   const { setForecastDaysData } = useWeather()
@@ -59,26 +58,47 @@ export default function Nav() {
     const data = await response.json()
 
     if (response.ok) {
-      const forecast = data.forecast.forecastday.map((day: any) => ({
-        date: day.date,
-        maxTemp: day.day.maxtemp_c,
-        minTemp: day.day.mintemp_c,
-        condition: day.day.condition.text,
-        icon: day.day.condition.icon,
-        maxWind: day.day.maxwind_kph,
-        totalPrecipitation: day.day.totalprecip_mm,
-        totalSnow: day.day.totalsnow_cm,
-        dailyChanceOfRain: day.day.daily_chance_of_rain,
-        dailyChanceOfSnow: day.day.daily_chance_of_snow,
+      const forecast = data.forecast.forecastday.map((today: any) => ({
+        date: today.date,
+        maxTemp: today.day.maxtemp_c,
+        minTemp: today.day.mintemp_c,
+        condition: today.day.condition.text,
+        icon: today.day.condition.icon,
+        maxWind: today.day.maxwind_kph,
+        totalPrecipitation: today.day.totalprecip_mm,
+        totalSnow: today.day.totalsnow_cm,
+        dailyChanceOfRain: today.day.daily_chance_of_rain,
+        dailyChanceOfSnow: today.day.daily_chance_of_snow,
       }))
       setForecastDaysData(forecast)
-      console.log(forecast) //Tirar depois
+      console.log(data) //Tirar depois
+    }
+  }
+
+  const { setForecastHoursData } = useWeather()
+  let getForecastHours = async (city: string) => {
+    const response = await fetch(
+      `http://api.weatherapi.com/v1//forecast.json?key=${API_KEY}&q=${city}&days=3&aqi=yes&lang=en`
+    )
+    const data = await response.json()
+
+    if (response.ok) {
+      const forecastHour = data.forecast.forecastday[0].hour.map(
+        (hour: any) => ({
+          time: hour.time.split(' ')[1],
+          temp: hour.temp_c,
+          fellsLike: hour.feelslike_c,
+          condition: hour.condition.text,
+        })
+      )
+      setForecastHoursData(forecastHour)
     }
   }
 
   const handleOnSubmit = (data: SearchFieldType) => {
     getCurrentWeather(data.city)
     getForecastWeather(data.city)
+    getForecastHours(data.city)
   }
 
   return (
