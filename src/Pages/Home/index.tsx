@@ -7,10 +7,11 @@ import Today from './Forecast/Today'
 import { useState } from 'react'
 import Hourly from './Forecast/Hourly'
 import Days from './Forecast/Days'
+import { useSelectedPeriod } from '@/selectedPeriodContext'
 
 export default function HomePage() {
   const { weatherData } = useWeather()
-  const [selectedPeriod, setSelectedPeriod] = useState<string>('')
+  const { selectedPeriod } = useSelectedPeriod()
 
   const renderPeriod = () => {
     switch (selectedPeriod) {
@@ -31,7 +32,7 @@ export default function HomePage() {
 
   return (
     <>
-      <PeriodNav selectedItem={selectedPeriod} onSelect={setSelectedPeriod} />
+      <PeriodNav />
       <Hero />
       {renderPeriod()}
     </>

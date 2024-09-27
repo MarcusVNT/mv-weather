@@ -1,6 +1,7 @@
 'use client'
 import {
   AppBar,
+  Button,
   IconButton,
   InputAdornment,
   Stack,
@@ -12,17 +13,21 @@ import SearchIcon from '@mui/icons-material/Search'
 import Image from 'next/image'
 import { Controller, useForm } from 'react-hook-form'
 import { useWeather } from '@/weatherContext'
+import { useRouter } from 'next/navigation'
+import { useSelectedPeriod } from '@/selectedPeriodContext'
 
 type SearchFieldType = {
   city: string
 }
 
 export default function Nav() {
-  const { control, handleSubmit } = useForm<SearchFieldType>({
+  const router = useRouter()
+  const { control, handleSubmit, reset } = useForm<SearchFieldType>({
     defaultValues: {
       city: '',
     },
   })
+  const { setSelectedPeriod } = useSelectedPeriod()
 
   const API_KEY = '79667419929e40fdb23162559240409'
 
@@ -71,7 +76,6 @@ export default function Nav() {
         dailyChanceOfSnow: today.day.daily_chance_of_snow,
       }))
       setForecastDaysData(forecast)
-      console.log(data) //Tirar depois
     }
   }
 
@@ -101,6 +105,13 @@ export default function Nav() {
     getForecastHours(data.city)
   }
 
+  const handleClick = () => {
+    setWeatherData(null)
+    reset({ city: '' })
+    setSelectedPeriod(null)
+    router.push('/')
+  }
+
   return (
     <AppBar
       sx={{
@@ -116,12 +127,14 @@ export default function Nav() {
           width="100%"
           spacing={2}
         >
-          <Image
-            src="/mv-weather-logo.png"
-            width={200}
-            height={35}
-            alt="Logo MV Waether"
-          />
+          <Button onClick={handleClick}>
+            <Image
+              src="/mv-weather-logo.png"
+              width={200}
+              height={35}
+              alt="Logo MV Waether"
+            />
+          </Button>
 
           <Grid component="form" onSubmit={handleSubmit(handleOnSubmit)}>
             <Controller
