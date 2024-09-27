@@ -1,5 +1,13 @@
 import { useWeather } from '@/weatherContext'
 import { List, ListItem, Stack, Typography } from '@mui/material'
+import Grid from '@mui/material/Grid2'
+
+//import icons
+import DateRangeSharpIcon from '@mui/icons-material/DateRangeSharp'
+import ThermostatIcon from '@mui/icons-material/Thermostat'
+import ThunderstormSharpIcon from '@mui/icons-material/ThunderstormSharp'
+import AcUnitSharpIcon from '@mui/icons-material/AcUnitSharp'
+import StreamOutlinedIcon from '@mui/icons-material/StreamOutlined'
 
 export default function Days() {
   const { forecastDaysData } = useWeather()
@@ -25,27 +33,7 @@ export default function Days() {
           3 days
         </Typography>
       </Stack>
-      <Stack
-        flexDirection="row"
-        justifyContent="space-between"
-        p="16px 32px 16px 16px"
-      >
-        <Typography sx={{ fontWeight: 600, flex: 1, textAlign: 'center' }}>
-          Day
-        </Typography>
-        <Typography sx={{ fontWeight: 600, flex: 1, textAlign: 'center' }}>
-          Max / Min
-        </Typography>
-        <Typography sx={{ fontWeight: 600, flex: 1, textAlign: 'center' }}>
-          Chance of Rain
-        </Typography>
-        <Typography sx={{ fontWeight: 600, flex: 1, textAlign: 'center' }}>
-          Chance of Snow
-        </Typography>
-        <Typography sx={{ fontWeight: 600, flex: 1, textAlign: 'center' }}>
-          Condition
-        </Typography>
-      </Stack>
+
       <Stack flexDirection="row">
         <List
           sx={{
@@ -55,6 +43,13 @@ export default function Days() {
             paddingRight: '8px',
           }}
         >
+          <Stack flexDirection="row" justifyContent="space-around" p="16px">
+            <DateRangeSharpIcon />
+            <ThermostatIcon />
+            <ThunderstormSharpIcon />
+            <AcUnitSharpIcon />
+            <StreamOutlinedIcon />
+          </Stack>
           {forecastDaysData?.map((daysData, index) => (
             <ListItem key={index} sx={{ borderBottom: '1px solid #5994a3' }}>
               <Stack
@@ -82,6 +77,38 @@ export default function Days() {
           ))}
         </List>
       </Stack>
+      <Grid p="16px 32px 16px 16px" gap="8px" container>
+        <Stack flexDirection="row" alignItems="center" gap="4px">
+          <DateRangeSharpIcon />
+          <Typography sx={{ fontWeight: 600, textAlign: 'center' }}>
+            Day
+          </Typography>
+        </Stack>
+        <Stack flexDirection="row" alignItems="center" gap="4px">
+          <ThermostatIcon />
+          <Typography sx={{ fontWeight: 600, textAlign: 'center' }}>
+            Max/Min
+          </Typography>
+        </Stack>
+        <Stack flexDirection="row" alignItems="center" gap="4px">
+          <ThunderstormSharpIcon />
+          <Typography sx={{ fontWeight: 600, textAlign: 'center' }}>
+            Chance of Rain
+          </Typography>
+        </Stack>
+        <Stack flexDirection="row" alignItems="center" gap="4px">
+          <AcUnitSharpIcon />
+          <Typography sx={{ fontWeight: 600, textAlign: 'center' }}>
+            Chance of Snow
+          </Typography>
+        </Stack>
+        <Stack flexDirection="row" alignItems="center" gap="4px">
+          <StreamOutlinedIcon />
+          <Typography sx={{ fontWeight: 600, textAlign: 'center' }}>
+            Condition
+          </Typography>
+        </Stack>
+      </Grid>
     </Stack>
   )
 }

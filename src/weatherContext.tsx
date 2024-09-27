@@ -36,7 +36,7 @@ type WeatherDataType = {
 
 type WeatherContextType = {
   weatherData: WeatherDataType | null
-  setWeatherData: (data: WeatherDataType) => void
+  setWeatherData: (data: WeatherDataType | null) => void
   forecastDaysData: ForecastDaysType[] | null
   setForecastDaysData: (data: ForecastDaysType[]) => void
   forecastHoursData: ForecastHoursType[] | null

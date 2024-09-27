@@ -1,6 +1,5 @@
 import { useWeather } from '@/weatherContext'
 import { List, ListItem, Stack, Typography } from '@mui/material'
-import Grid from '@mui/material/Grid2'
 
 //icon imports
 import ThermostatIcon from '@mui/icons-material/Thermostat'
@@ -24,7 +23,7 @@ export default function Today() {
       'Friday',
       'Saturday',
     ]
-    const dayIndex = date.getDay()
+    const dayIndex = date.getUTCDay()
     return daysOfWeek[dayIndex]
   }
 
@@ -41,8 +40,15 @@ export default function Today() {
       borderRadius="8px"
     >
       <Stack>
-        <Stack flexDirection="row" justifyContent="center" gap="16px">
-          <Typography fontWeight={600}>Today:</Typography>
+        <Stack
+          flexDirection="row"
+          justifyContent="center"
+          gap="16px"
+          alignItems="center"
+        >
+          <Typography variant="h1" fontWeight={600}>
+            Today:
+          </Typography>
           <Typography>
             {dayOfWeek} ({weatherData?.localTime})
           </Typography>
