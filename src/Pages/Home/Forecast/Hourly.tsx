@@ -14,15 +14,11 @@ export default function Hourly() {
       borderRadius="8px"
     >
       <Stack flexDirection="row" justifyContent="center" gap="32px">
-        <Typography fontWeight={600} fontSize="1.5rem">
+        <Typography fontWeight={600} variant="h1">
           Hourly
         </Typography>
       </Stack>
-      <Stack
-        flexDirection="row"
-        justifyContent="space-between"
-        p="16px 32px 16px 16px"
-      >
+      <Stack flexDirection="row" justifyContent="space-around" p="8px">
         <Typography sx={{ fontWeight: 600, flex: 1, textAlign: 'center' }}>
           Hour
         </Typography>
@@ -30,7 +26,7 @@ export default function Hourly() {
           Temperature
         </Typography>
         <Typography sx={{ fontWeight: 600, flex: 1, textAlign: 'center' }}>
-          Feels like
+          Feels Like
         </Typography>
         <Typography sx={{ fontWeight: 600, flex: 1, textAlign: 'center' }}>
           Condition
