@@ -1,6 +1,7 @@
 import { useWeather } from '@/weatherContext'
 import { List, ListItem, Stack, Typography } from '@mui/material'
 import Grid from '@mui/material/Grid2'
+import dayjs from 'dayjs'
 
 //import icons
 import DateRangeSharpIcon from '@mui/icons-material/DateRangeSharp'
@@ -13,10 +14,7 @@ export default function Days() {
   const { forecastDaysData } = useWeather()
 
   function getDayOfWeek(date: string) {
-    const day = new Date(date)
-    const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
-    const dayIndex = day.getUTCDay()
-    return daysOfWeek[dayIndex]
+    return dayjs(date).format('ddd')
   }
 
   return (

@@ -2,7 +2,7 @@ import { useWeather } from '@/weatherContext'
 import { List, ListItem, Stack, Typography } from '@mui/material'
 
 export default function Hourly() {
-  const { forecastHoursData, forecastDaysData } = useWeather()
+  const { forecastHoursData } = useWeather()
 
   return (
     <Stack
