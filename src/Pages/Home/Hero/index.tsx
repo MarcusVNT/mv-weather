@@ -3,6 +3,7 @@ import { useWeather } from '@/weatherContext'
 import { Stack, Typography, useMediaQuery } from '@mui/material'
 import Grid from '@mui/material/Grid2'
 import Image from 'next/image'
+import dayjs from 'dayjs'
 
 // icons import
 import DeviceThermostatOutlinedIcon from '@mui/icons-material/DeviceThermostatOutlined'
@@ -49,7 +50,9 @@ export default function Hero() {
             </Typography>
           </Typography>
           <Grid>
-            <Typography>{weatherData.localTime}</Typography>
+            <Typography>
+              {dayjs(weatherData.localTime).format('MM/DD/YYYY HH:mm')}
+            </Typography>
           </Grid>
         </Stack>
         <Stack

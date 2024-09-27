@@ -88,13 +88,20 @@ export const theme = createTheme({
             },
             '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline':
               {
-                borderColor: '#3fa6bb', // Cor da borda quando em foco
+                borderColor: '#a7cad1', // Cor da borda quando em foco
               },
-            '& .MuiInputLabel-root': {
+
+            '& .MuiOutlinedInput-root.Mui-focused ': {
               color: '#a7cad1',
             },
             '& .MuiInputBase-input': {
               color: '#a7cad1', // Cor do texto quando o campo está em foco
+            },
+            '& .MuiInputLabel-root': {
+              color: '#a7cad1',
+            },
+            '& .MuiInputLabel-root.Mui-focused': {
+              color: '#a7cad1', // Cor do label quando o input está focado
             },
           },
         },

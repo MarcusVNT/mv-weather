@@ -1,5 +1,6 @@
 import { useWeather } from '@/weatherContext'
 import { List, ListItem, Stack, Typography } from '@mui/material'
+import dayjs from 'dayjs'
 
 //icon imports
 import ThermostatIcon from '@mui/icons-material/Thermostat'
@@ -13,18 +14,7 @@ export default function Today() {
   const { forecastDaysData, weatherData } = useWeather()
 
   function getDayOfWeek(localtime: string) {
-    const date = new Date(localtime)
-    const daysOfWeek = [
-      'Sunday',
-      'Monday',
-      'Tuesday',
-      'Wednesday',
-      'Thursday',
-      'Friday',
-      'Saturday',
-    ]
-    const dayIndex = date.getUTCDay()
-    return daysOfWeek[dayIndex]
+    return dayjs(localtime).format('dddd')
   }
 
   if (!weatherData) return null
@@ -50,7 +40,7 @@ export default function Today() {
             Today:
           </Typography>
           <Typography>
-            {dayOfWeek} ({weatherData?.localTime})
+            {dayOfWeek} ({dayjs(weatherData.localTime).format('MM/DD/YYYY')})
           </Typography>
         </Stack>
         <Stack flexDirection="row">
