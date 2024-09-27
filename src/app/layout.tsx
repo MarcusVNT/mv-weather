@@ -3,6 +3,7 @@ import LayoutClient from './layout.client'
 import Nav from '@/components/Nav'
 import { Container, Stack } from '@mui/material'
 import { WeatherProvider } from '@/weatherContext'
+import { SelectedPeriodProvider } from '@/selectedPeriodContext'
 
 export const metadata: Metadata = {
   title: 'MV Weather',
@@ -22,12 +23,14 @@ export default function RootLayout({
       <body>
         <LayoutClient>
           <WeatherProvider>
-            <Container disableGutters>
-              <Stack maxWidth={1200}>
-                <Nav />
-                {children}
-              </Stack>
-            </Container>
+            <SelectedPeriodProvider>
+              <Container disableGutters>
+                <Stack maxWidth={1200}>
+                  <Nav />
+                  {children}
+                </Stack>
+              </Container>
+            </SelectedPeriodProvider>
           </WeatherProvider>
         </LayoutClient>
       </body>

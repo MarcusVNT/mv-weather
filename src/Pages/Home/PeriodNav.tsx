@@ -1,13 +1,11 @@
 'use client'
+import { useSelectedPeriod } from '@/selectedPeriodContext'
 import { MenuItem, Stack, styled } from '@mui/material'
+import { set } from 'react-hook-form'
 
-export default function PeriodNav({
-  selectedItem,
-  onSelect,
-}: {
-  selectedItem: string | null
-  onSelect: (item: string) => void
-}) {
+export default function PeriodNav() {
+  const { selectedPeriod, setSelectedPeriod } = useSelectedPeriod()
+
   const StyledMenuItem = styled(MenuItem)(({ selected }) => ({
     fontWeight: 700,
     position: 'relative',
@@ -42,20 +40,20 @@ export default function PeriodNav({
     >
       <Stack flexDirection="row" justifyContent="space-evenly" width="100%">
         <StyledMenuItem
-          selected={selectedItem === 'today'}
-          onClick={() => onSelect('today')}
+          selected={selectedPeriod === 'today'}
+          onClick={() => setSelectedPeriod('today')}
         >
           Today
         </StyledMenuItem>
         <StyledMenuItem
-          selected={selectedItem === 'hourly'}
-          onClick={() => onSelect('hourly')}
+          selected={selectedPeriod === 'hourly'}
+          onClick={() => setSelectedPeriod('hourly')}
         >
           Hourly
         </StyledMenuItem>
         <StyledMenuItem
-          selected={selectedItem === '3 days'}
-          onClick={() => onSelect('3 days')}
+          selected={selectedPeriod === '3 days'}
+          onClick={() => setSelectedPeriod('3 days')}
         >
           3 days
         </StyledMenuItem>
