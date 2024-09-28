@@ -23,7 +23,7 @@ export default function Hourly() {
           Hour
         </Typography>
         <Typography sx={{ fontWeight: 600, flex: 1, textAlign: 'center' }}>
-          Temperature
+          Temp
         </Typography>
         <Typography sx={{ fontWeight: 600, flex: 1, textAlign: 'center' }}>
           Feels Like
