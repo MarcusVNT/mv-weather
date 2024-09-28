@@ -82,7 +82,7 @@ export default function Nav() {
   const { setForecastHoursData } = useWeather()
   let getForecastHours = async (city: string) => {
     const response = await fetch(
-      `http://api.weatherapi.com/v1//forecast.json?key=${API_KEY}&q=${city}&days=3&aqi=yes&lang=en`
+      `https://api.weatherapi.com/v1//forecast.json?key=${API_KEY}&q=${city}&days=3&aqi=yes&lang=en`
     )
     const data = await response.json()
 
