@@ -12,15 +12,14 @@ import WaterDropOutlinedIcon from '@mui/icons-material/WaterDropOutlined'
 import StreamOutlinedIcon from '@mui/icons-material/StreamOutlined'
 
 export default function Hero() {
-  const { weatherData } = useWeather()
+  const { currentWeather } = useWeather()
 
-  if (!weatherData) {
+  if (!currentWeather) {
     return null
   }
-
-  const iconUrl = weatherData.icon.startsWith('//')
-    ? `https:${weatherData.icon}`
-    : weatherData.icon
+  const iconUrl = currentWeather.icon.startsWith('//')
+    ? `https:${currentWeather.icon}`
+    : currentWeather.icon
 
   const isSmallScreen = useMediaQuery('(max-width:560px)')
 
@@ -44,14 +43,14 @@ export default function Hero() {
           borderRadius="8px 8px 0 0"
         >
           <Typography variant="h1">
-            {weatherData.city}
+            {currentWeather.city}
             <Typography>
-              {weatherData.region} - {weatherData.country}
+              {currentWeather.region} - {currentWeather.country}
             </Typography>
           </Typography>
           <Grid>
             <Typography>
-              {dayjs(weatherData.localTime).format('MM/DD/YYYY HH:mm')}
+              {dayjs(currentWeather.localTime).format('MM/DD/YYYY HH:mm')}
             </Typography>
           </Grid>
         </Stack>
@@ -68,7 +67,9 @@ export default function Hero() {
             alignItems="center"
           >
             <Typography fontSize="1.25rem">Temperature:</Typography>
-            <Typography fontSize="3rem">{weatherData.temperature}ºC</Typography>
+            <Typography fontSize="3rem">
+              {currentWeather.temperature}ºC
+            </Typography>
           </Stack>
           <Stack
             alignItems="center"
@@ -95,7 +96,7 @@ export default function Hero() {
                 fontSize={isSmallScreen ? '0.9rem' : '1rem'}
                 fontWeight={600}
               >
-                Condition: {weatherData.condition}
+                Condition: {currentWeather.condition}
               </Typography>
             </Stack>
             <Stack flexDirection="row" gap="8px">
@@ -104,7 +105,7 @@ export default function Hero() {
                 fontWeight={600}
                 fontSize={isSmallScreen ? '0.9rem' : '1rem'}
               >
-                Feels like: {weatherData.feelsLike}ºC
+                Feels like: {currentWeather.feelsLike}ºC
               </Typography>
             </Stack>
           </Grid>
@@ -115,7 +116,7 @@ export default function Hero() {
                 fontWeight={600}
                 fontSize={isSmallScreen ? '0.9rem' : '1rem'}
               >
-                Wind: {weatherData.wind} km/h
+                Wind: {currentWeather.wind} km/h
               </Typography>
             </Stack>
             <Stack flexDirection="row" gap="8px">
@@ -124,7 +125,7 @@ export default function Hero() {
                 fontWeight={600}
                 fontSize={isSmallScreen ? '0.9rem' : '1rem'}
               >
-                Humidity: {weatherData.humidity}%
+                Humidity: {currentWeather.humidity}%
               </Typography>
             </Stack>
           </Grid>

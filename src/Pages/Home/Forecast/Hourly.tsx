@@ -2,7 +2,7 @@ import { useWeather } from '@/weatherContext'
 import { List, ListItem, Stack, Typography } from '@mui/material'
 
 export default function Hourly() {
-  const { forecastHoursData } = useWeather()
+  const { forecastHours } = useWeather()
 
   return (
     <Stack
@@ -41,7 +41,7 @@ export default function Hourly() {
             paddingRight: '8px',
           }}
         >
-          {forecastHoursData?.map((hourData, index) => (
+          {forecastHours?.map((hourData, index) => (
             <ListItem key={index} sx={{ borderBottom: '1px solid #5994a3' }}>
               <Stack
                 flexDirection="row"

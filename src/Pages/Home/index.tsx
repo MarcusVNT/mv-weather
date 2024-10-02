@@ -10,7 +10,7 @@ import Days from './Forecast/Days'
 import { useSelectedPeriod } from '@/selectedPeriodContext'
 
 export default function HomePage() {
-  const { weatherData } = useWeather()
+  const { currentWeather } = useWeather()
   const { selectedPeriod } = useSelectedPeriod()
 
   const renderPeriod = () => {
@@ -26,7 +26,7 @@ export default function HomePage() {
     }
   }
 
-  if (!weatherData) {
+  if (!currentWeather) {
     return <HeroNull />
   }
 

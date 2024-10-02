@@ -11,7 +11,7 @@ import AcUnitSharpIcon from '@mui/icons-material/AcUnitSharp'
 import StreamOutlinedIcon from '@mui/icons-material/StreamOutlined'
 
 export default function Days() {
-  const { forecastDaysData } = useWeather()
+  const { forecastDays } = useWeather()
 
   function getDayOfWeek(date: string) {
     return dayjs(date).format('ddd')
@@ -48,7 +48,7 @@ export default function Days() {
             <AcUnitSharpIcon />
             <StreamOutlinedIcon />
           </Stack>
-          {forecastDaysData?.map((daysData, index) => (
+          {forecastDays?.map((daysData, index) => (
             <ListItem key={index} sx={{ borderBottom: '1px solid #5994a3' }}>
               <Stack
                 flexDirection="row"
