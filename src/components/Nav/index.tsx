@@ -31,8 +31,7 @@ export default function Nav() {
   const { fetchWeatherData, resetWeatherData } = useWeather()
 
   const handleOnSubmit = async (data: SearchFieldType) => {
-    const weatherData = await fetchWeatherData(data.city)
-    console.log(weatherData)
+    await fetchWeatherData(data.city)
   }
 
   const handleClick = () => {

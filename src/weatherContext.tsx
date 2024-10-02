@@ -80,7 +80,7 @@ export const WeatherProvider = ({ children }: { children: ReactNode }) => {
         `https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&days=3&q=${city}&aqi=yes&lang=en`
       )
       const weatherData = await weatherDataResponse.json()
-      // console.log(weatherData)
+      console.log(weatherData)
       if (weatherDataResponse.ok) {
         setCurrentWeather({
           city: weatherData.location.name,
