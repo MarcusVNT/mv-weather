@@ -1,49 +1,97 @@
 'use client'
-import { createContext, ReactNode, useContext, useState } from 'react'
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from 'react'
 
-type ForecastHoursType = {
-  condition: string
-  temp: number
-  fellsLike: number
-  time: string
-}
+// type ForecastHoursType = {
+//   condition: string
+//   temp: number
+//   fellsLike: number
+//   time: string
+// }
 
-type ForecastDaysType = {
-  date: string
-  maxTemp: number
-  minTemp: number
-  condition: string
-  icon: string
-  maxWind: number
-  dailyChanceOfRain: number
-  dailyChanceOfSnow: number
-  totalPrecipitation: number
-  totalSnow: number
-}
+// type ForecastDaysType = {
+//   date: string
+//   maxTemp: number
+//   minTemp: number
+//   condition: string
+//   icon: string
+//   maxWind: number
+//   dailyChanceOfRain: number
+//   dailyChanceOfSnow: number
+//   totalPrecipitation: number
+//   totalSnow: number
+// }
 
-type CurrentWeatherType = {
-  city: string
-  country: string
-  region: string
-  localTime: string
-  condition: string
-  temperature: number
-  feelsLike: number
-  icon: string
-  wind: number
-  humidity: number
+// type CurrentWeatherType = {
+//   city: string
+//   country: string
+//   region: string
+//   localTime: string
+//   condition: string
+//   temperature: number
+//   feelsLike: number
+//   icon: string
+//   wind: number
+//   humidity: number
+// }
+
+interface WeatherApiResponse {
+  location: {
+    name: string
+    country: string
+    region: string
+    localTime: string
+  }
+  current: {
+    condition: {
+      text: string
+      icon: string
+    }
+    temperature: number
+    feelslike: number
+    wind: number
+    humidity: number
+  }
+  forecast: {
+    forecastday: {
+      date: string
+      day: {
+        maxTemp: number
+        minTemp: number
+        condition: {
+          text: string
+          icon: string
+        }
+        maxWind: number
+        dailyChanceOfRain: number
+        dailyChanceOfSnow: number
+        totalPrecipitation: number
+        totalSnow: number
+      }
+      hour: Array<{
+        time: string
+        temp: number
+        feelslike: number
+        condition: {
+          text: string
+        }
+      }>
+    }[]
+  }
 }
 
 type WeatherContextType = {
-  fetchWeatherData: (city: string) => Promise<{
-    currentWeather: CurrentWeatherType | null
-    forecastDays: ForecastDaysType[] | null
-    forecastHours: ForecastHoursType[] | null
-  } | null>
+  fetchWeatherData: (city: string) => Promise<WeatherApiResponse | null>
   resetWeatherData: () => void
-  currentWeather: CurrentWeatherType | null
-  forecastDays: ForecastDaysType[] | null
-  forecastHours: ForecastHoursType[] | null
+  locationData: WeatherApiResponse['location'] | null
+  currentWeather: WeatherApiResponse['current'] | null
+  forecastDays: WeatherApiResponse['forecast']['forecastday'] | null
+  forecastHours: WeatherApiResponse['forecast']['forecastday'][0]['hour'] | null
 }
 
 const weatherContext = createContext<WeatherContextType | undefined>(undefined)
@@ -57,85 +105,112 @@ export const useWeather = () => {
 }
 
 export const WeatherProvider = ({ children }: { children: ReactNode }) => {
-  const [currentWeather, setCurrentWeather] =
-    useState<CurrentWeatherType | null>(null)
-  const [forecastDays, setForecastDays] = useState<ForecastDaysType[] | null>(
-    null
-  )
-  const [forecastHours, setForecastHours] = useState<
-    ForecastHoursType[] | null
+  const [locationData, setLocationData] = useState<
+    WeatherApiResponse['location'] | null
   >(null)
+  const [currentWeather, setCurrentWeather] = useState<
+    WeatherApiResponse['current'] | null
+  >(null)
+  const [forecastDays, setForecastDays] = useState<
+    WeatherApiResponse['forecast']['forecastday']
+  >([])
+  const [forecastHours, setForecastHours] = useState<
+    WeatherApiResponse['forecast']['forecastday'][0]['hour']
+  >([])
 
   const API_KEY = '79667419929e40fdb23162559240409'
 
   const resetWeatherData = () => {
+    setLocationData(null)
     setCurrentWeather(null)
-    setForecastDays(null)
-    setForecastHours(null)
+    setForecastDays([])
+    setForecastHours([])
   }
 
-  async function fetchWeatherData(city: string) {
+  async function fetchWeatherData(
+    city: string
+  ): Promise<WeatherApiResponse | null> {
     try {
       const weatherDataResponse = await fetch(
         `https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&days=3&q=${city}&aqi=yes&lang=en`
       )
       const weatherData = await weatherDataResponse.json()
-      console.log(weatherData)
+
       if (weatherDataResponse.ok) {
-        setCurrentWeather({
-          city: weatherData.location.name,
+        if (
+          !weatherData.forecast ||
+          !Array.isArray(weatherData.forecast.forecastday)
+        ) {
+          console.error('Previsão do tempo não encontrada na resposta da API.')
+          return null
+        }
+
+        setLocationData({
+          name: weatherData.location.name,
           country: weatherData.location.country,
           region: weatherData.location.region,
           localTime: weatherData.location.localtime,
-          condition: weatherData.current.condition.text,
+        })
+
+        setCurrentWeather({
+          condition: {
+            text: weatherData.current.condition.text,
+            icon: weatherData.current.condition.icon,
+          },
           temperature: weatherData.current.temp_c,
-          feelsLike: weatherData.current.feelslike_c,
-          icon: weatherData.current.condition.icon,
+          feelslike: weatherData.current.feelslike_c,
           wind: weatherData.current.wind_kph,
           humidity: weatherData.current.humidity,
         })
-
-        //Previsão do dia
+        // Usando map para processar os dias de previsão e as horas
         const forecastDays = weatherData.forecast.forecastday.map(
-          (today: any) => ({
-            date: today.date,
-            maxTemp: today.day.maxtemp_c,
-            minTemp: today.day.mintemp_c,
-            condition: today.day.condition.text,
-            icon: today.day.condition.icon,
-            maxWind: today.day.maxwind_kph,
-            totalPrecipitation: today.day.totalprecip_mm,
-            totalSnow: today.day.totalsnow_cm,
-            dailyChanceOfRain: today.day.daily_chance_of_rain,
-            dailyChanceOfSnow: today.day.daily_chance_of_snow,
+          (day: any) => ({
+            date: day.date,
+            day: {
+              maxTemp: day.day.maxtemp_c,
+              minTemp: day.day.mintemp_c,
+              condition: {
+                text: day.day.condition.text,
+                icon: day.day.condition.icon,
+              },
+              maxWind: day.day.maxwind_kph,
+              dailyChanceOfRain: day.day.daily_chance_of_rain,
+              dailyChanceOfSnow: day.day.daily_chance_of_snow,
+              totalPrecipitation: day.day.totalprecip_mm,
+              totalSnow: day.day.totalsnow_cm,
+            },
           })
         )
         setForecastDays(forecastDays)
 
         const forecastHours = weatherData.forecast.forecastday[0].hour.map(
           (hour: any) => ({
-            time: hour.time.split(' ')[1],
+            time: hour.time.split(' ')[1], //extrair apenas o horário
             temp: hour.temp_c,
-            fellsLike: hour.feelslike_c,
-            condition: hour.condition.text,
+            feelslike: hour.feelslike_c,
+            condition: {
+              text: hour.condition.text,
+            },
           })
         )
         setForecastHours(forecastHours)
 
-        return { currentWeather, forecastDays, forecastHours }
+        return weatherData
       } else {
-        console.error('Erro na resposta da previsão do clima.')
+        console.error('Erro ao buscar dados do clima:', weatherData)
+        return null
       }
     } catch (error) {
-      console.error('Erro na requisição de clima:', error)
+      console.error('Erro ao buscar dados do clima:', error)
+      return null
     }
-    return null
   }
   return (
     <weatherContext.Provider
       value={{
         fetchWeatherData,
         resetWeatherData,
+        locationData,
         currentWeather,
         forecastDays,
         forecastHours,

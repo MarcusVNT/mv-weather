@@ -11,14 +11,14 @@ import WaterSharpIcon from '@mui/icons-material/WaterSharp'
 import SevereColdSharpIcon from '@mui/icons-material/SevereColdSharp'
 
 export default function Today() {
-  const { forecastDays, currentWeather } = useWeather()
+  const { locationData, forecastDays, currentWeather } = useWeather()
 
   function getDayOfWeek(localtime: string) {
     return dayjs(localtime).format('dddd')
   }
 
   if (!currentWeather) return null
-  const dayOfWeek = getDayOfWeek(currentWeather.localTime)
+  const dayOfWeek = getDayOfWeek(locationData!.localTime)
 
   return (
     <Stack
@@ -40,7 +40,7 @@ export default function Today() {
             Today:
           </Typography>
           <Typography>
-            {dayOfWeek} ({dayjs(currentWeather.localTime).format('MM/DD/YYYY')})
+            {dayOfWeek} ({dayjs(locationData?.localTime).format('MM/DD/YYYY')})
           </Typography>
         </Stack>
         <Stack flexDirection="row">
@@ -56,7 +56,8 @@ export default function Today() {
                   <Typography>High / Low:</Typography>
                 </Stack>
                 <Typography>
-                  {forecastDays?.[0].maxTemp}ºC / {forecastDays?.[0].minTemp}ºC
+                  {forecastDays?.[0].day.maxTemp}ºC /{' '}
+                  {forecastDays?.[0].day.minTemp}ºC
                 </Typography>
               </Stack>
             </ListItem>
@@ -70,7 +71,7 @@ export default function Today() {
                   <AirSharpIcon />
                   <Typography>Max Wind Speed:</Typography>
                 </Stack>
-                <Typography>{forecastDays?.[0].maxWind}Km/h</Typography>
+                <Typography>{forecastDays?.[0].day.maxWind}Km/h</Typography>
               </Stack>
             </ListItem>
             <ListItem sx={{ borderBottom: '1px solid #5994a3' }}>
@@ -83,7 +84,9 @@ export default function Today() {
                   <ThunderstormSharpIcon />
                   <Typography>Chance Of Rain:</Typography>
                 </Stack>
-                <Typography>{forecastDays?.[0].dailyChanceOfRain}%</Typography>
+                <Typography>
+                  {forecastDays?.[0].day.dailyChanceOfRain}%
+                </Typography>
               </Stack>
             </ListItem>
             <ListItem sx={{ borderBottom: '1px solid #5994a3' }}>
@@ -96,7 +99,9 @@ export default function Today() {
                   <AcUnitSharpIcon />
                   <Typography>Chance Of Snow:</Typography>
                 </Stack>
-                <Typography>{forecastDays?.[0].dailyChanceOfSnow}%</Typography>
+                <Typography>
+                  {forecastDays?.[0].day.dailyChanceOfSnow}%
+                </Typography>
               </Stack>
             </ListItem>
             <ListItem sx={{ borderBottom: '1px solid #5994a3' }}>
@@ -110,7 +115,7 @@ export default function Today() {
                   <Typography>Total Precipitation:</Typography>
                 </Stack>
                 <Typography>
-                  {forecastDays?.[0].totalPrecipitation}mm
+                  {forecastDays?.[0].day.totalPrecipitation}mm
                 </Typography>
               </Stack>
             </ListItem>
@@ -124,7 +129,7 @@ export default function Today() {
                   <SevereColdSharpIcon />
                   <Typography>Total Snow:</Typography>
                 </Stack>
-                <Typography>{forecastDays?.[0].totalSnow}cm</Typography>
+                <Typography>{forecastDays?.[0].day.totalSnow}cm</Typography>
               </Stack>
             </ListItem>
           </List>
