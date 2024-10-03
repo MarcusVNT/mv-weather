@@ -59,16 +59,16 @@ export default function Days() {
                   {getDayOfWeek(daysData.date)}
                 </Typography>
                 <Typography sx={{ flex: 1, textAlign: 'center' }}>
-                  {daysData.maxTemp}ºC / {daysData.minTemp}ºC
+                  {daysData.day.maxTemp}ºC / {daysData.day.minTemp}ºC
                 </Typography>
                 <Typography sx={{ flex: 1, textAlign: 'center' }}>
-                  {daysData.dailyChanceOfRain}%
+                  {daysData.day.dailyChanceOfRain}%
                 </Typography>
                 <Typography sx={{ flex: 1, textAlign: 'center' }}>
-                  {daysData.dailyChanceOfSnow}%
+                  {daysData.day.dailyChanceOfSnow}%
                 </Typography>
                 <Typography sx={{ flex: 1, textAlign: 'center' }}>
-                  {daysData.condition}
+                  {daysData.day.condition.text}
                 </Typography>
               </Stack>
             </ListItem>

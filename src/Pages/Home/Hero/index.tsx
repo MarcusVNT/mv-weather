@@ -12,14 +12,14 @@ import WaterDropOutlinedIcon from '@mui/icons-material/WaterDropOutlined'
 import StreamOutlinedIcon from '@mui/icons-material/StreamOutlined'
 
 export default function Hero() {
-  const { currentWeather } = useWeather()
+  const { locationData, currentWeather } = useWeather()
 
   if (!currentWeather) {
     return null
   }
-  const iconUrl = currentWeather.icon.startsWith('//')
-    ? `https:${currentWeather.icon}`
-    : currentWeather.icon
+  const iconUrl = currentWeather.condition.icon.startsWith('//')
+    ? `https:${currentWeather.condition.icon}`
+    : currentWeather.condition.icon
 
   const isSmallScreen = useMediaQuery('(max-width:560px)')
 
@@ -43,14 +43,14 @@ export default function Hero() {
           borderRadius="8px 8px 0 0"
         >
           <Typography variant="h1">
-            {currentWeather.city}
+            {locationData?.name}
             <Typography>
-              {currentWeather.region} - {currentWeather.country}
+              {locationData?.region} - {locationData?.country}
             </Typography>
           </Typography>
           <Grid>
             <Typography>
-              {dayjs(currentWeather.localTime).format('MM/DD/YYYY HH:mm')}
+              {dayjs(locationData?.localTime).format('MM/DD/YYYY HH:mm')}
             </Typography>
           </Grid>
         </Stack>
@@ -96,7 +96,7 @@ export default function Hero() {
                 fontSize={isSmallScreen ? '0.9rem' : '1rem'}
                 fontWeight={600}
               >
-                Condition: {currentWeather.condition}
+                Condition: {currentWeather.condition.text}
               </Typography>
             </Stack>
             <Stack flexDirection="row" gap="8px">
@@ -105,7 +105,7 @@ export default function Hero() {
                 fontWeight={600}
                 fontSize={isSmallScreen ? '0.9rem' : '1rem'}
               >
-                Feels like: {currentWeather.feelsLike}ºC
+                Feels like: {currentWeather.feelslike}ºC
               </Typography>
             </Stack>
           </Grid>

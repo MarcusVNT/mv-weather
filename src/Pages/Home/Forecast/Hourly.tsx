@@ -55,10 +55,10 @@ export default function Hourly() {
                   {hourData.temp}ºC
                 </Typography>
                 <Typography sx={{ flex: 1, textAlign: 'center' }}>
-                  {hourData.fellsLike}ºC
+                  {hourData.feelslike}ºC
                 </Typography>
                 <Typography sx={{ flex: 1, textAlign: 'center' }}>
-                  {hourData.condition}
+                  {hourData.condition.text}
                 </Typography>
               </Stack>
             </ListItem>
