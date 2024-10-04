@@ -65,7 +65,7 @@ interface WeatherApiResponse {
         sunset: string
         moonrise: string
         moonset: string
-        moonPhase: string
+        moon_phase: string
       }
       date: string
       day: {

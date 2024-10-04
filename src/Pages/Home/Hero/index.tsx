@@ -81,22 +81,6 @@ export default function Hero() {
           >
             <Image src={iconUrl} alt="Climate icon" width={64} height={64} />
           </Stack>
-          <Stack
-            alignItems="center"
-            justifyContent="center"
-            p="8px"
-            borderRadius="8px"
-            bgcolor="rgba(216, 243, 248, 0.2)"
-          >
-            <Typography fontSize="1.25rem">Astronomy:</Typography>
-            <Stack>
-              <Typography>Sun rise: {forecastAstro?.sunrise}</Typography>
-              <Typography>Sun set: {forecastAstro?.sunset}</Typography>
-              <Typography>Moon rise: {forecastAstro?.moonrise}</Typography>
-              <Typography>Moon set: {forecastAstro?.moonset}</Typography>
-              <Typography>Moon phase: {forecastAstro?.moonPhase}</Typography>
-            </Stack>
-          </Stack>
         </Stack>
         <Stack
           borderRadius="8px"
