@@ -12,7 +12,7 @@ import WaterDropOutlinedIcon from '@mui/icons-material/WaterDropOutlined'
 import StreamOutlinedIcon from '@mui/icons-material/StreamOutlined'
 
 export default function Hero() {
-  const { locationData, currentWeather } = useWeather()
+  const { locationData, currentWeather, forecastAstro } = useWeather()
 
   if (!currentWeather) {
     return null
@@ -71,6 +71,7 @@ export default function Hero() {
               {currentWeather.temperature}ºC
             </Typography>
           </Stack>
+
           <Stack
             alignItems="center"
             justifyContent="center"

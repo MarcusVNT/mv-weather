@@ -1,7 +1,6 @@
 'use client'
 import { useSelectedPeriod } from '@/selectedPeriodContext'
 import { MenuItem, Stack, styled } from '@mui/material'
-import { set } from 'react-hook-form'
 
 export default function PeriodNav() {
   const { selectedPeriod, setSelectedPeriod } = useSelectedPeriod()
@@ -56,6 +55,12 @@ export default function PeriodNav() {
           onClick={() => setSelectedPeriod('3 days')}
         >
           3 days
+        </StyledMenuItem>
+        <StyledMenuItem
+          selected={selectedPeriod === 'astro'}
+          onClick={() => setSelectedPeriod('astro')}
+        >
+          Astronomy
         </StyledMenuItem>
       </Stack>
     </Stack>

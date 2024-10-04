@@ -6,6 +6,7 @@ import {
   useEffect,
   useState,
 } from 'react'
+import { set } from 'react-hook-form'
 
 // type ForecastHoursType = {
 //   condition: string
@@ -59,6 +60,13 @@ interface WeatherApiResponse {
   }
   forecast: {
     forecastday: {
+      astro: {
+        sunrise: string
+        sunset: string
+        moonrise: string
+        moonset: string
+        moon_phase: string
+      }
       date: string
       day: {
         maxTemp: number
@@ -92,6 +100,9 @@ type WeatherContextType = {
   currentWeather: WeatherApiResponse['current'] | null
   forecastDays: WeatherApiResponse['forecast']['forecastday'] | null
   forecastHours: WeatherApiResponse['forecast']['forecastday'][0]['hour'] | null
+  forecastAstro:
+    | WeatherApiResponse['forecast']['forecastday'][0]['astro']
+    | null
 }
 
 const weatherContext = createContext<WeatherContextType | undefined>(undefined)
@@ -117,6 +128,9 @@ export const WeatherProvider = ({ children }: { children: ReactNode }) => {
   const [forecastHours, setForecastHours] = useState<
     WeatherApiResponse['forecast']['forecastday'][0]['hour']
   >([])
+  const [forecastAstro, setForecastAstro] = useState<
+    WeatherApiResponse['forecast']['forecastday'][0]['astro'] | null
+  >(null)
 
   const API_KEY = '79667419929e40fdb23162559240409'
 
@@ -125,6 +139,7 @@ export const WeatherProvider = ({ children }: { children: ReactNode }) => {
     setCurrentWeather(null)
     setForecastDays([])
     setForecastHours([])
+    setForecastAstro(null)
   }
 
   async function fetchWeatherData(
@@ -162,7 +177,7 @@ export const WeatherProvider = ({ children }: { children: ReactNode }) => {
           wind: weatherData.current.wind_kph,
           humidity: weatherData.current.humidity,
         })
-        // Usando map para processar os dias de previsão e as horas
+
         const forecastDays = weatherData.forecast.forecastday.map(
           (day: any) => ({
             date: day.date,
@@ -183,6 +198,8 @@ export const WeatherProvider = ({ children }: { children: ReactNode }) => {
         )
         setForecastDays(forecastDays)
 
+        setForecastAstro(weatherData.forecast.forecastday[0].astro)
+
         const forecastHours = weatherData.forecast.forecastday[0].hour.map(
           (hour: any) => ({
             time: hour.time.split(' ')[1], //extrair apenas o horário
@@ -195,6 +212,7 @@ export const WeatherProvider = ({ children }: { children: ReactNode }) => {
         )
         setForecastHours(forecastHours)
 
+        console.log(weatherData)
         return weatherData
       } else {
         console.error('Erro ao buscar dados do clima:', weatherData)
@@ -205,6 +223,7 @@ export const WeatherProvider = ({ children }: { children: ReactNode }) => {
       return null
     }
   }
+
   return (
     <weatherContext.Provider
       value={{
@@ -213,6 +232,7 @@ export const WeatherProvider = ({ children }: { children: ReactNode }) => {
         locationData,
         currentWeather,
         forecastDays,
+        forecastAstro,
         forecastHours,
       }}
     >

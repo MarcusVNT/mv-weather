@@ -8,6 +8,7 @@ import { useState } from 'react'
 import Hourly from './Forecast/Hourly'
 import Days from './Forecast/Days'
 import { useSelectedPeriod } from '@/selectedPeriodContext'
+import Astro from './Forecast/Astro'
 
 export default function HomePage() {
   const { currentWeather } = useWeather()
@@ -21,6 +22,8 @@ export default function HomePage() {
         return <Hourly />
       case '3 days':
         return <Days />
+      case 'astro':
+        return <Astro />
       default:
         return null
     }
