@@ -12,7 +12,7 @@ import WaterDropOutlinedIcon from '@mui/icons-material/WaterDropOutlined'
 import StreamOutlinedIcon from '@mui/icons-material/StreamOutlined'
 
 export default function Hero() {
-  const { locationData, currentWeather, forecastAstro } = useWeather()
+  const { locationData, currentWeather } = useWeather()
 
   if (!currentWeather) {
     return null
@@ -61,32 +61,39 @@ export default function Hero() {
           p="8px 32px"
         >
           <Stack
+            flexDirection="row"
+            width="100%"
+            alignItems="center"
+            justifyContent="space-between"
             borderRadius="8px"
             bgcolor="rgba(216, 243, 248, 0.2)"
-            p="8px"
-            alignItems="center"
+            p="16px 32px"
+            gap="16px"
           >
-            <Typography fontSize="1.25rem">Temperature:</Typography>
-            <Typography fontSize="3rem">
-              {currentWeather.temperature}ºC
-            </Typography>
-          </Stack>
-
-          <Stack
-            alignItems="center"
-            justifyContent="center"
-            p="8px"
-            borderRadius="8px"
-            bgcolor="rgba(216, 243, 248, 0.2)"
-          >
-            <Image src={iconUrl} alt="Climate icon" width={64} height={64} />
+            <Stack alignItems="center">
+              <Typography fontSize={isSmallScreen ? '1rem' : '1.25rem'}>
+                Temperature:
+              </Typography>
+              <Typography fontSize={isSmallScreen ? '2rem' : '3rem'}>
+                {currentWeather.temperature}ºC
+              </Typography>
+            </Stack>
+            <Stack
+              alignItems="center"
+              justifyContent="center"
+              p="8px"
+              borderRadius="8px"
+              bgcolor="rgba(89, 148, 163, 0.2)"
+            >
+              <Image src={iconUrl} alt="Climate icon" width={64} height={64} />
+            </Stack>
           </Stack>
         </Stack>
         <Stack
           borderRadius="8px"
           bgcolor="rgba(216, 243, 248, 0.2)"
           p={isSmallScreen ? '8px 24px' : '8px 48px'}
-          m="0 8px 8px 8px"
+          m="8px"
           flexDirection={isSmallScreen ? 'column' : 'row'}
           justifyContent="space-between"
         >
