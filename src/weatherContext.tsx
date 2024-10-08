@@ -1,45 +1,5 @@
 'use client'
-import {
-  createContext,
-  ReactNode,
-  useContext,
-  useEffect,
-  useState,
-} from 'react'
-import { set } from 'react-hook-form'
-
-// type ForecastHoursType = {
-//   condition: string
-//   temp: number
-//   fellsLike: number
-//   time: string
-// }
-
-// type ForecastDaysType = {
-//   date: string
-//   maxTemp: number
-//   minTemp: number
-//   condition: string
-//   icon: string
-//   maxWind: number
-//   dailyChanceOfRain: number
-//   dailyChanceOfSnow: number
-//   totalPrecipitation: number
-//   totalSnow: number
-// }
-
-// type CurrentWeatherType = {
-//   city: string
-//   country: string
-//   region: string
-//   localTime: string
-//   condition: string
-//   temperature: number
-//   feelsLike: number
-//   icon: string
-//   wind: number
-//   humidity: number
-// }
+import { createContext, ReactNode, useContext, useState } from 'react'
 
 interface WeatherApiResponse {
   location: {
