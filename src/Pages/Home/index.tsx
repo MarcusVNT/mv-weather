@@ -1,13 +1,14 @@
 'use client'
 import { useWeather } from '@/weatherContext'
 import Hero from './Hero'
-import PeriodNav from './PeriodNav'
+import PeriodNav from '../../components/PeriodNav/PeriodNav'
 import HeroNull from './Hero/HeroNull'
 import Today from './Forecast/Today'
 import Hourly from './Forecast/Hourly'
 import Days from './Forecast/Days'
 import { useSelectedPeriod } from '@/selectedPeriodContext'
 import Astro from './Forecast/Astro'
+import PeriodNavDrawer from '@/components/PeriodNav/PeriodNavDrawer'
 
 export default function HomePage() {
   const { currentWeather } = useWeather()
@@ -19,7 +20,7 @@ export default function HomePage() {
         return <Today />
       case 'hourly':
         return <Hourly />
-      case '3 days':
+      case '3-days':
         return <Days />
       case 'astro':
         return <Astro />

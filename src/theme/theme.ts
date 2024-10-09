@@ -71,6 +71,7 @@ export const theme = createTheme({
         },
       },
     },
+
     MuiTextField: {
       variants: [
         {
@@ -106,6 +107,13 @@ export const theme = createTheme({
           },
         },
       ],
+    },
+    MuiDrawer: {
+      styleOverrides: {
+        paper: {
+          backgroundColor: '#efe9db',
+        },
+      },
     },
   },
 })
