@@ -2,17 +2,20 @@
 import { useWeather } from '@/weatherContext'
 import Hero from './Hero'
 import PeriodNav from '../../components/PeriodNav/PeriodNav'
+import PeriodNavDrawer from '@/components/PeriodNav/PeriodNavDrawer'
 import HeroNull from './Hero/HeroNull'
 import Today from './Forecast/Today'
 import Hourly from './Forecast/Hourly'
 import Days from './Forecast/Days'
 import { useSelectedPeriod } from '@/selectedPeriodContext'
 import Astro from './Forecast/Astro'
-import PeriodNavDrawer from '@/components/PeriodNav/PeriodNavDrawer'
+import { useMediaQuery } from '@mui/material'
 
 export default function HomePage() {
   const { currentWeather } = useWeather()
   const { selectedPeriod } = useSelectedPeriod()
+
+  const isSmallScreen = useMediaQuery('(max-width:560px)')
 
   const renderPeriod = () => {
     switch (selectedPeriod) {
@@ -35,7 +38,7 @@ export default function HomePage() {
 
   return (
     <>
-      <PeriodNav />
+      {isSmallScreen ? <PeriodNavDrawer /> : <PeriodNav />}
       <Hero />
       {renderPeriod()}
     </>

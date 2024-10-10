@@ -12,6 +12,7 @@ import {
   Stack,
 } from '@mui/material'
 import { useState } from 'react'
+import MenuIcon from '@mui/icons-material/Menu'
 
 export default function PeriodNavDrawer() {
   const [open, setOpen] = useState(false)
@@ -63,8 +64,10 @@ export default function PeriodNavDrawer() {
     </Stack>
   )
   return (
-    <Stack>
-      <Button onClick={toogleDrawer(true)}>Open Drawer</Button>
+    <Stack alignItems="start">
+      <Button onClick={toogleDrawer(true)}>
+        <MenuIcon />
+      </Button>
       <Drawer open={open} onClose={toogleDrawer(false)} anchor="left">
         {DrawerList}
       </Drawer>
