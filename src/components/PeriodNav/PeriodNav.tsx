@@ -9,9 +9,9 @@ export default function PeriodNav() {
     fontWeight: 700,
     position: 'relative',
     color: selected ? '#3fa6bb' : 'inherit',
-    backgroundColor: 'transparent', // Garante que o background sempre será transparente
+    backgroundColor: 'transparent',
     '&.Mui-selected': {
-      backgroundColor: 'transparent !important', // Remove o background ao selecionar
+      backgroundColor: 'transparent !important',
     },
 
     '&::before': {
@@ -51,8 +51,8 @@ export default function PeriodNav() {
           Hourly
         </StyledMenuItem>
         <StyledMenuItem
-          selected={selectedPeriod === '3 days'}
-          onClick={() => setSelectedPeriod('3 days')}
+          selected={selectedPeriod === '3-days'}
+          onClick={() => setSelectedPeriod('3-days')}
         >
           3 days
         </StyledMenuItem>
