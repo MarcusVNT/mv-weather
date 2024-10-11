@@ -27,7 +27,7 @@ export default function PeriodNavDrawer() {
     { id: 'astro', label: 'Astro' },
   ]
 
-  const { selectedPeriod, setSelectedPeriod } = useSelectedPeriod()
+  const { setSelectedPeriod } = useSelectedPeriod()
   const handleClick = (periodId: string) => {
     setSelectedPeriod(periodId)
     setOpen(false)
@@ -39,7 +39,14 @@ export default function PeriodNavDrawer() {
       role="presentation"
       onClick={toogleDrawer(false)}
     >
-      <List sx={{ width: '100%' }}>
+      <List
+        sx={{
+          width: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '8px',
+        }}
+      >
         {periods.map(period => (
           <ListItem key={period.id} disablePadding>
             <ListItemButton
@@ -53,6 +60,7 @@ export default function PeriodNavDrawer() {
             >
               <ListItemText
                 primary={period.label}
+                primaryTypographyProps={{ fontWeight: 'bold' }}
                 sx={{
                   textAlign: 'center',
                 }}
@@ -68,7 +76,19 @@ export default function PeriodNavDrawer() {
       <Button onClick={toogleDrawer(true)}>
         <MenuIcon />
       </Button>
-      <Drawer open={open} onClose={toogleDrawer(false)} anchor="left">
+      <Drawer
+        open={open}
+        onClose={toogleDrawer(false)}
+        anchor="left"
+        PaperProps={{
+          sx: {
+            display: 'inline-block',
+            height: 'auto',
+            borderRadius: '8px',
+            marginTop: '55px',
+          },
+        }}
+      >
         {DrawerList}
       </Drawer>
     </Stack>
