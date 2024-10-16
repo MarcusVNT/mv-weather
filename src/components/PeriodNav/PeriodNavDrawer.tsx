@@ -13,6 +13,7 @@ import {
 } from '@mui/material'
 import { useState } from 'react'
 import MenuIcon from '@mui/icons-material/Menu'
+import StarRateOutlinedIcon from '@mui/icons-material/StarRateOutlined'
 
 export default function PeriodNavDrawer() {
   const [open, setOpen] = useState(false)
@@ -58,6 +59,12 @@ export default function PeriodNavDrawer() {
               }}
               onClick={() => handleClick(period.id)}
             >
+              <StarRateOutlinedIcon
+                sx={{
+                  size: '16px',
+                  color: 'primary.main',
+                }}
+              />
               <ListItemText
                 primary={period.label}
                 primaryTypographyProps={{ fontWeight: 'bold' }}
